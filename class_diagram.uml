@@ -1,0 +1,163 @@
+@startuml
+class Artwork {
+    - _title: str
+    - _artist: str
+    - _date_of_creation: str
+    - _historical_significance: str
+    - _exhibition_location: str
+    - _exhibitions: list
+    + Artwork(title: str, artist: str, date_of_creation: str, historical_significance: str, exhibition_location: str)
+    + get_title(): str
+    + set_title(title: str): void
+    + get_artist(): str
+    + set_artist(artist: str): void
+    + get_date_of_creation(): str
+    + set_date_of_creation(date_of_creation: str): void
+    + get_historical_significance(): str
+    + set_historical_significance(historical_significance: str): void
+    + get_exhibition_location(): str
+    + set_exhibition_location(exhibition_location: str): void
+    + add_to_exhibition(exhibition: Exhibition): void
+    + get_exhibitions(): list
+}
+
+class Exhibition {
+    - _name: str
+    - _location: str
+    - _duration: str
+    - _artworks: list
+    + Exhibition(name: str, location: str, duration: str)
+    + get_name(): str
+    + set_name(name: str): void
+    + get_location(): str
+    + set_location(location: str): void
+    + get_duration(): str
+    + set_duration(duration: str): void
+    + add_artwork(artwork: Artwork): void
+    + get_artworks(): list
+}
+
+class Visitor {
+    - _name: str
+    - _age: int
+    - _national_id: str
+    - _tickets: list
+    + Visitor(name: str, age: int, national_id: str)
+    + get_name(): str
+    + set_name(name: str): void
+    + get_age(): int
+    + set_age(age: int): void
+    + get_national_id(): str
+    + set_national_id(national_id: str): void
+    + add_ticket(ticket: Ticket): void
+    + get_tickets(): list
+}
+
+class Ticket {
+    - _visitor: Visitor
+    - _event: str
+    - _price: float
+    + Ticket(visitor: Visitor, event: str, price: float)
+    + get_visitor(): Visitor
+    + set_visitor(visitor: Visitor): void
+    + get_event(): str
+    + set_event(event: str): void
+    + get_price(): float
+    + set_price(price: float): void
+}
+
+class Event {
+    - _name: str
+    - _location: str
+    - _date: str
+    - _ticket_price: float
+    + Event(name: str, location: str, date: str, ticket_price: float)
+    + get_name(): str
+    + set_name(name: str): void
+    + get_location(): str
+    + set_location(location: str): void
+    + get_date(): str
+    + set_date(date: str): void
+    + get_ticket_price(): float
+    + set_ticket_price(ticket_price: float): void
+}
+
+class Tour {
+    - _guide: str
+    - _date: str
+    - _time: str
+    - _max_capacity: int
+    + Tour(guide: str, date: str, time: str, max_capacity: int)
+    + get_guide(): str
+    + set_guide(guide: str): void
+    + get_date(): str
+    + set_date(date: str): void
+    + get_time(): str
+    + set_time(time: str): void
+    + get_max_capacity(): int
+    + set_max_capacity(max_capacity: int): void
+}
+
+class Payment {
+    - _amount: float
+    - _payment_method: str
+    - _transaction_id: str
+    + Payment(amount: float, payment_method: str, transaction_id: str)
+    + get_amount(): float
+    + set_amount(amount: float): void
+    + get_payment_method(): str
+    + set_payment_method(payment_method: str): void
+    + get_transaction_id(): str
+    + set_transaction_id(transaction_id: str): void
+}
+
+class Staff {
+    - _name: str
+    - _role: str
+    - _contact_info: str
+    + Staff(name: str, role: str, contact_info: str)
+    + get_name(): str
+    + set_name(name: str): void
+    + get_role(): str
+    + set_role(role: str): void
+    + get_contact_info(): str
+    + set_contact_info(contact_info: str): void
+}
+
+class Location {
+    - _name: str
+    - _capacity: int
+    - _current_occupancy: int
+    + Location(name: str, capacity: int, current_occupancy: int)
+    + get_name(): str
+    + set_name(name: str): void
+    + get_capacity(): int
+    + set_capacity(capacity: int): void
+    + get_current_occupancy(): int
+    + set_current_occupancy(current_occupancy: int): void
+}
+
+class Reservation {
+    - _visitor: Visitor
+    - _event_or_tour: str
+    - _date: str
+    - _status: str
+    + Reservation(visitor: Visitor, event_or_tour: str, date: str, status: str)
+    + get_visitor(): Visitor
+    + set_visitor(visitor: Visitor): void
+    + get_event_or_tour(): str
+    + set_event_or_tour(event_or_tour: str): void
+    + get_date(): str
+    + set_date(date: str): void
+    + get_status(): str
+    + set_status(status: str): void
+}
+
+Visitor "1" -- "0..*" Ticket
+Exhibition "1" -- "0..*" Artwork
+Reservation "1" -- "1" Visitor
+Reservation "1" -- "1" Event
+Reservation "1" -- "1" Tour
+Visitor -- Payment
+Staff -- Location
+@enduml
